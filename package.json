@@ -1,8 +1,8 @@
 {
-  "homepage": "https://tayyab2468.github.io/BMI-Calculator",
   "name": "bmi",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://tayyab2468.github.io/BMI-Calculator",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -12,6 +12,9 @@
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -38,8 +41,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "gh-pages": "^6.2.0"
   }
 }
