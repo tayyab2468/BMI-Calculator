@@ -4,35 +4,48 @@ import "./style.css";
 
 function App() {
   const [weight, setWeight] = useState("");
-  const [height, setheight] = useState("");
+  const [height, setHeight] = useState(""); // Fixed typo here: 'setheight' to 'setHeight'
 
   const [bmi, setBmi] = useState("");
   const [category, setCategory] = useState("");
-  const [color, setcolor] = useState("");
+  const [color, setColor] = useState(""); // Changed 'setcolor' to 'setColor'
 
   const getBmi = () => {
     if (height && weight) {
-      const heightInMeters = height / 100;
-      const bmiValue = parseFloat(weight) / heightInMeters ** 2;
+      // Ensure height and weight are valid numbers
+      const weightNum = parseFloat(weight);
+      const heightNum = parseFloat(height);
+      
+      if (isNaN(weightNum) || isNaN(heightNum)) {
+        setBmi("Please enter valid numbers for both weight and height");
+        setCategory("");
+        setColor(""); // Clear any previous color state
+        return;
+      }
+
+      const heightInMeters = heightNum / 100; // Convert height to meters
+      const bmiValue = weightNum / heightInMeters ** 2;
 
       setBmi(bmiValue.toFixed(2));
 
-     
       if (bmiValue < 18.5) {
-        setCategory("Underweight"); 
+        setCategory("Underweight");
+        setColor("orange"); // Category 'Underweight' has orange color here
       } else if (bmiValue < 24.9) {
         setCategory("Normal Weight");
-        setcolor("green");
+        setColor("green");
       } else if (bmiValue < 29.9) {
         setCategory("Overweight");
-        setcolor("orange");
+        setColor("orange");
       } else {
-        setCategory("Extremly Fat Dangerous for Health");
-        setcolor(" red");
+        setCategory("Extremely Obese - Dangerous for Health");
+        setColor("red");
       }
     } else {
-      setBmi("Invalid input");
+      setBmi("Please enter both weight and height");
       setCategory(""); 
+      setColor(""); // Clear previous color
+    }
   };
 
   return (
@@ -50,8 +63,8 @@ function App() {
       <label>Height (cm)</label>
       <input
         type="text"
-        onChange={(e) => setheight(e.target.value)}
-        placeholder="Enter height in feet"
+        onChange={(e) => setHeight(e.target.value)} 
+        placeholder="Enter height in cm"
       />
 
       <button onClick={getBmi}>Submit</button>
@@ -60,7 +73,5 @@ function App() {
     </div>
   );
 }
-}
 
 export default App;
-
